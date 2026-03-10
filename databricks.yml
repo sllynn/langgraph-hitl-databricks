@@ -1,0 +1,27 @@
+bundle:
+  name: coa-interrupt-poc
+
+workspace:
+  host: https://fevm-brickcon-landparcels-classic.cloud.databricks.com
+
+resources:
+  jobs:
+    deploy_sub_agent:
+      name: "coa-deploy-sub-agent"
+      tasks:
+        - task_key: deploy_sub_agent
+          notebook_task:
+            notebook_path: ./notebooks/05_deploy_sub_agent.py
+
+    deploy_supervisor:
+      name: "coa-deploy-supervisor"
+      tasks:
+        - task_key: deploy_supervisor
+          notebook_task:
+            notebook_path: ./notebooks/06_deploy_supervisor.py
+
+targets:
+  dev:
+    default: true
+    workspace:
+      profile: brickcon
