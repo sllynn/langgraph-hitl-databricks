@@ -9,12 +9,11 @@ Caller
   |
   v
 coa-supervisor (Model Serving endpoint)
-  |
-  v
-coa-sub-agent (Model Serving endpoint)
-  |
-  v
-Lakebase (shared checkpoint store)
+  |                  |
+  v                  v
+coa-sub-agent    Lakebase (shared checkpoint store)
+  |                  ^
+  +------------------+
 ```
 
 - **Supervisor** orchestrates sub-agents, each running on separate Model Serving endpoints
