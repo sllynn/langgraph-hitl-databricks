@@ -29,8 +29,11 @@ response = client.responses.create(
     model="coa-supervisor",
     input=[{"type": "message", "role": "user", "content": "analyze Q4 revenue"}],
 )
+# response.output_text => '{"question": "To complete \'analyze Q4 revenue\', which format do you prefer?", "options": ["detailed", "summary", "bullet points"]}'
 # response.custom_outputs => {"status": "interrupted", "thread_id": "sup-xxx", "interrupt": {...}, "sub_agent": "coa-sub-agent"}
 ```
+
+The supervisor's output (`openai.types.responses.Response.output_text`) is the sub-agent's clarification question, surfaced all the way up through the supervisor.
 
 **Resume** — pass `thread_id`, input text is the user's answer:
 ```python
@@ -39,6 +42,7 @@ response = client.responses.create(
     input=[{"type": "message", "role": "user", "content": "summary"}],
     extra_body={"custom_inputs": {"thread_id": "sup-xxx"}},
 )
+# response.output_text => "Completed analysis of 'analyze Q4 revenue' with format: summary"
 # response.custom_outputs => {"status": "complete", "thread_id": "sup-xxx"}
 ```
 
